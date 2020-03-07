@@ -1,28 +1,29 @@
 def convertString (input_string):
     output = 0
     input_string = input_string.strip()
-    neg = 0
+    neg = 1
+    start_index = 0
 
-    for i in range(0, len(input_string)):
+    if(ord(input_string[0]) == 45 and len(input_string) > 1):
+            neg = -1
+            start_index = 1
+
+    for i in range(start_index, len(input_string)):
         output *= 10
-        current = ord(input_string[i])
-        if(current == 45 and len(input_string) > 1 and i == 0):
-            neg = 1
-        elif(current > 47 and current < 58):
-            output += current - 48
+        current = ord(input_string[i]) - 48
+        
+        if(current >= 0 and current <= 9):
+            output += current
         else:
-            return None
-    
-    if(neg):
-        output *= -1
-    
-    return output
+            return None    
+
+    return neg * output
 
 
 
 
 # first line
-a = "-10924083"
+a = "-192837404851"
 result = convertString(a)
 
 f = open("convertNumString_Output.txt","w+")
